@@ -1,1 +1,7 @@
-1) timerfd_create
+1) timerfd_create vs settimer
+
+The difference between settimer()/timer_create() function and timerfd_create() function is how to get the notification of timer expiration. A process in which timerfd_create() is being used will get the notification of timer expiration via a file descriptor while the other process in which settimer()/timer_create() are being used will get SIG_ALRM signal whenever timers are expired, To publish a SIG_ALRM signal inside the kernel, as I know, swapper stops its current job, sends the signal and resumes the job. This kind of action can make performance degradation when many performance-critical processes are being executed.
+
+
+2) using alarms to get backtrace for process crash
+- https://github.com/crawl/crawl/blob/master/crawl-ref/source/crash.cc
