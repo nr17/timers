@@ -73,6 +73,8 @@ void TimerMgr::Tick() {
             for (auto itm = m.begin(); itm != m.end(); ++itm) {
                 TimerT tMeta = itm->second;
                 tMeta.cb(tMeta.id);
+                // remove fired timer from stop map
+                m_stopMap.erase(tMeta.id);
             }
             //remove this list elem
             m_timerList.pop_front();
